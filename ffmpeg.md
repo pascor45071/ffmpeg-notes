@@ -6,7 +6,8 @@ ffmpeg notes
 
 src: https://www.youtube.com/watch?v=BiMP_hN8f6s
 
-[ffmpeg pdf slides, courtesy of the original author](https://github.com/lingtalfi/ffmpeg-notes/blob/master/ffmpeg_presentation.pdf)
+And here are the [ffmpeg pdf slides](https://github.com/lingtalfi/ffmpeg-notes/blob/master/ffmpeg_presentation.pdf),
+courtesy of the original author.
 
 
 
