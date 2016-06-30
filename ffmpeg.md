@@ -6,6 +6,9 @@ ffmpeg notes
 
 src: https://www.youtube.com/watch?v=BiMP_hN8f6s
 
+[ffmpeg pdf slides, courtesy of the original author](https://github.com/lingtalfi/ffmpeg-notes/blob/master/ffmpeg_presentation.pdf)
+
+
 
 Terminology
 -------------
