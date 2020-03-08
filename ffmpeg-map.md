@@ -104,19 +104,45 @@ Then we write a second map option: **-map 0:2**, which refers to the third strea
 
 And so on...
 
-
-
-
-What if you have multiple inputs then?
+What if you have multiple inputs ?
 ------------------------------------------------
 
- I've not been that far yet, so: I don't know.
+Map's multiple input syntax is a simple extension of the single-input-file format.
+For example, merge/combine an SRT subtitles-only file into/with a video+audio-only file.
+Notes:
+   The specific input stream positions must be known ahead of time.
+   No conversions will be done, only full stream copying by using [-codec copy].
 
+   INPUTS             infile#1 instream#1  infile#1   instream#2
+                             \   /                 \   /
+    File#1 contains video in [0:0]    and audio in [0:1]
+                              ---                   ---
+   OUTPUTS                     |-> outfile 0:0       |-> outfile 0:1
+                                            | n=0                | n'=n+1=1
 
+   INPUTS               infile#2     stream#1
+                                \   /
+    File#2 contains SRT subs in [1:0]
+		                 ---
+   OUTPUTS                        |-> outfile 0:1
+                                                | n''=n'+1=2
+Notes:
+    [-map] argument indices (m:n) refer to streams (:n) in the same order
+    as the input file order (m:).
 
+    Since infile#2 contains only a single stream it may be indexed
+    using the shortened form [-map 1] instead of [-map 1:0].
 
+The (Windows) command line follows. Note: The carat char is the line continuation
+char for windows BAT/CMD scripts. Also, everything past the carat chars are
+simply my way of documentation here. They must not exist in a real script!
 
-
-
-
-
+ffmpeg.EXE              ^   Execute this EXE file, Windows only. The '.EXE' is optional.
+    -i AV_inpfile       ^   First input file; Audio+video. The given order is critical !
+    -i SRT_inpfile      ^   Second input file; Text subtitles (SRT, ASS, etc.)
+    -hide_banner        ^   Suppress some excessive output message verbosity.
+    -map 0:0 -map 0:1   ^   [0:] pertains to the first input file.  [ ':0' is always be video ?]
+                        ^                                      [ ':1' is always be audio ?]
+    -map 1:0            ^   [1:] pertains to the second input file. 
+    -codec copy         ^   Copy all streams: No reencoding of any streams.
+    -y AV-SRT_outfile   ^   Write/overwrite to the following file name.
